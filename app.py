@@ -7,11 +7,8 @@ import logging
 logging.basicConfig(filename='app.log', level=logging.INFO,
                     format='%(asctime)s %(levelname)s:%(message)s')
 
-
 app = Flask(__name__)
-
 model_dir = 'models'
-
 pipeline_path = os.path.join(model_dir, 'pipeline.pkl')
 
 try:
