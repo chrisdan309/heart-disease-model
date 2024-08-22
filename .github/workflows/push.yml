@@ -46,9 +46,9 @@ jobs:
         run: docker run gcr.io/app-heart-model/heart-model-cdp:latest pytest /app/
 
 
-      - name: Push the Docker image
-        run: docker push chrisdan/heart-model-cdp:latest
-        if: github.ref == 'refs/heads/main'
+#      - name: Push the Docker image
+#        run: docker push chrisdan/heart-model-cdp:latest
+#        if: github.ref == 'refs/heads/main'
 
       - name: Push to Google Container Registry
         run: docker push gcr.io/app-heart-model/heart-model-cdp
