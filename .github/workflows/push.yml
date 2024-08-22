@@ -23,6 +23,12 @@ jobs:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -40,13 +46,23 @@ jobs:
         run: docker push chrisdan/heart-model-cdp:latest
         if: github.ref == 'refs/heads/main'
 
-      - name: Install Heroku CLI
-        run: curl https://cli-assets.heroku.com/install.sh | sh
+      - name: Push to Google Container Registry
+        run: docker push gcr.io/app-heart-model/heart-model-cdp
 
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Deploy to Google Cloud Run
         run: |
-          heroku container:login
-          heroku container:push web --app app-heart-model
-          heroku container:release web --app app-heart-model
+          gcloud run deploy heart-model-cdp \
+            --image gcr.io/app-heart-model/heart-model-cdp \
+            --platform managed \
+            --region us-central1 \
+            --allow-unauthenticated
+#      - name: Install Heroku CLI
+#        run: curl https://cli-assets.heroku.com/install.sh | sh
+#
+#      - name: Deploy to Heroku
+#        env:
+#          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+#        run: |
+#          heroku container:login
+#          heroku container:push web --app app-heart-model
+#          heroku container:release web --app app-heart-model
