@@ -1,4 +1,4 @@
-name: CI prueba
+name: Deploy GCP
 
 on:
   push:
@@ -36,14 +36,14 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build the Docker image
-        run: docker build -t chrisdan/heart-model-cdp:latest .
+        run: docker build -t gcr.io/app-heart-model/heart-model-cdp:latest .
 
       - name: Run unit tests
-        run: docker run chrisdan/heart-model-cdp:latest pytest /app/
+        run: docker run gcr.io/app-heart-model/heart-model-cdp:latest pytest /app/
 
 
       - name: Push the Docker image
-        run: docker push chrisdan/heart-model-cdp:latest
+        run: docker push gcr.io/app-heart-model/heart-model-cdp:latest
         if: github.ref == 'refs/heads/main'
 
       - name: Push to Google Container Registry
