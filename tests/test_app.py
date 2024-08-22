@@ -15,7 +15,7 @@ def client():
 
 def test_hello_world(client):
     response = client.get('/')
-    assert response.data == b'Hello World!'
+    assert response.data == b'Hello World 2!'
 
 
 def test_predict(client):

@@ -26,7 +26,7 @@ except Exception as e:
 
 @app.route('/')
 def hello_world():
-	return 'Hello World!'
+	return 'Hello World 2!'
 
 
 @app.route('/predict', methods=['POST'])
