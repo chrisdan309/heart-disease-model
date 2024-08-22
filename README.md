@@ -2,6 +2,10 @@
 
 Christian Daniel Poma Navarro
 
+El servicio desplegado se ubica en esta ruta
+
+https://heart-model-cdp-2zs5mbipbq-uc.a.run.app/
+
 ## Carga de los datos y exploración
 
 Utilizando el dataset del siguiente URL ``https://www.kaggle.com/datasets/amirmahdiabbootalebi/heart-disease`` donde se realiza la carga de datos utilizando direcciones relativas a la ubicación del archivo y unas cuantas funciones de python para saber algunas características de la data
@@ -430,3 +434,4 @@ gcloud run deploy heart-model-cdp \
   --region us-central1 \
   --allow-unauthenticated
 ```
+
