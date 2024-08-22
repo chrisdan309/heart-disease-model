@@ -33,7 +33,8 @@ jobs:
         run: docker build -t my-flask-app:latest .
 
       - name: Run unit tests
-        run: docker run my-flask-app:latest pytest /tests
+        run: docker run my-flask-app:latest pytest /app/
+
 
       - name: Push the Docker image
         run: docker push my-flask-app:latest

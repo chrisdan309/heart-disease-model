@@ -11,10 +11,21 @@ RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 COPY app.py /app/
 
 # Crear el directorio models y copiar el modelo
+RUN mkdir -p /app/data
+COPY data/heart.csv /app/data/
+
+# Crear el directorio models y copiar el modelo
 RUN mkdir -p /app/models
 COPY models/pipeline.pkl /app/models/
+COPY models/training.ipynb /app/models/
 
 # COPY models/preprocessor.pkl /app/models/
+
+# Crear el directorio models y copiar el modelo
+RUN mkdir -p /app/tests
+COPY tests/test_app.py /app/tests/
+COPY tests/test_pipeline.py /app/tests/
+
 
 
 # Instalar las dependencias necesarias
